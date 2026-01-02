@@ -46,7 +46,7 @@ connection.once("open",()=>{
 
 app.use("/api/users",userRouter)
 app.use("/api/products",productRouter)
-app.use("/api/review",reviewRouter)
+app.use("/api/reviews",reviewRouter)
 
 
 
@@ -54,3 +54,7 @@ app.listen(3000,()=>{
     console.log("Server is running  on port 3000")
 
 });
+
+
+//Dilani@example.com  123-customer
+//Dilani12@example.com 123-admin

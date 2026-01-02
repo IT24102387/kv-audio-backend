@@ -10,7 +10,7 @@ export function addReview(req,res){
 
     const data=req.body;
 
-    data.name=req.user.firstName+" "+req.user.lastName;
+    data.name=req.user.firstName+ " " +req.user.lastName;
     data.profilePicture=req.user.profilePicture;
     data.email=req.user.email;
 
