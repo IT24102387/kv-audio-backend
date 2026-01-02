@@ -28,3 +28,5 @@ export function addProduct(req,res){
     res.status(500).json({error :"Prodcut adition failed"});
    });
 }
+
+
