@@ -1,7 +1,7 @@
 import Product from "../models/product.js";
+import { isItAdmin } from "./userController.js";
 
 export function addProduct(req,res){
-   console.log(req.user)
 
    if(req.user==null){
       res.status(401).json({
@@ -30,10 +30,20 @@ export function addProduct(req,res){
 }
 
 export async function getProducts(req,res){
+  
+
    try{
+      if(isItAdmin(req)){
       const products=await Product.find();
       res.json(products)
+      return;
 
+      }else{
+         const products= await Product.find({availability : true});
+         res.json(products);
+         return;
+      }
+      
    }catch(e){
       res.status(500).json({
          message : "Failed to get products"
@@ -42,5 +52,61 @@ export async function getProducts(req,res){
    }
 
 }
+
+//update product
+
+export async function updateProduct(req,res){
+   try{
+      if(isItAdmin(req)){
+         const key=req.params.key
+
+         const data=req.body;
+
+         await Product.updateOne ({key:key},data)  
+         //first key-what change product,secod key-apikey with come key
+         //this Product use make a connection in database collecton and and code
+         // updateOne Product has method
+         res.json({
+            message : "Product updated successfully"
+         })
+
+
+      }else{
+         res.status(403).json({
+            message : "You are not authorized to perform this action"
+         })
+      }
+
+   }catch(e){
+      res.status(500).json({
+         message : "Failed to update product"
+      })
+
+   }
+
+}
+// delete product 
+
+export async function deleteProduct(req,res){
+   try{
+      if(isItAdmin(req)){
+         const key =req.params.key; //get the key from parameter ("/:key")
+         await Product.deleteOne({key:key})
+         res.json({
+            message : "Product deleted successfully"
+         })
+
+      }else{
+         res.status(403).json({
+            message : "You are not authorize to performe this action "
+         })
+      }
+
+   }catch{
+
+   }
+
+}
+
 
 
