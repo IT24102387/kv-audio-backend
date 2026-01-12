@@ -36,6 +36,10 @@ const inquirySchema=new mongoose.Schema({
         type : Boolean,
         required :true,
         default :false
+    },
+    phone: {
+        type:Number,
+        required :true
     }
 
 
