@@ -61,5 +61,5 @@ app.listen(3000,()=>{
 });
 
 
-//Dilani@example.com  123-customer
+//Dilani@example.com / 123-customer
 //Dilani12@example.com 123-admin
